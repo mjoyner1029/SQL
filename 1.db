@@ -1,0 +1,35 @@
+-- Task 1: Insert data into Members and WorkoutSessions
+-- Inserting records into the Members table
+INSERT INTO Members (id, name, age)
+VALUES 
+    (1, 'Jane Doe', 28),
+    (2, 'John Smith', 35),
+    (3, 'Alice Johnson', 42),
+    (4, 'Bob Brown', 31);
+
+-- Inserting records into the WorkoutSessions table
+INSERT INTO WorkoutSessions (session_id, member_id, session_date, session_time, activity)
+VALUES 
+    (1, 1, '2024-08-15', 'Morning', 'Yoga'),
+    (2, 2, '2024-08-15', 'Evening', 'Weightlifting'),
+    (3, 3, '2024-08-15', 'Afternoon', 'Pilates'),
+    (4, 4, '2024-08-15', 'Morning', 'Cardio'),
+    (5, 1, '2024-08-16', 'Morning', 'Spin Class'),
+    (6, 2, '2024-08-16', 'Evening', 'Crossfit');
+
+-- Task 2: Update workout session time for Jane Doe
+UPDATE WorkoutSessions
+SET session_time = 'Evening'
+WHERE member_id = (SELECT id FROM Members WHERE name = 'Jane Doe')
+AND session_date = '2024-08-15'
+AND activity = 'Yoga';
+
+-- Task 3: Remove John Smith from Members and WorkoutSessions
+-- Delete workout sessions for John Smith
+DELETE FROM WorkoutSessions
+WHERE member_id = (SELECT id FROM Members WHERE name = 'John Smith');
+
+-- Delete the member record for John Smith
+DELETE FROM Members
+WHERE name = 'John Smith';
+
